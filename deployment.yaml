@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spingboot-demoapp-bff
+  name: spingboot-demoapp-bff
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spingboot-demoapp-bff
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spingboot-demoapp-bff
+    spec:
+      containers:
+      - image: dvelez/sprinboot-demoapp-bff
+        name: sprinboot-demoapp-bff
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: springboot-demoapp-bff
+  name: springboot-demoapp-bff
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30007
+  selector:
+    app: springboot-demoapp-bff
+  type: NodePort
+status:
+  loadBalancer: {}
